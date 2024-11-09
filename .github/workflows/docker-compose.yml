@@ -23,44 +23,26 @@ jobs:
           apt-get install -y docker-compose || sudo apt-get install -y docker-compose
           docker-compose -v
 
-#      - name: Run Docker-compose
-#        run: |
-#          docker-compose -f ./docker-compose/gogs-git/docker-compose.yml up -d
-#          docker-compose -f ./docker-compose/gogs-git/docker-compose.yml ps
-#          sleep 30
-
       - name: Run every Docker-compose
         id: compose_files
         run: |
-          pwd
-          ls -ltrha . */
+          pwd; ls -ltrha . */
+          docker ps -a
           for file in docker-compose/*/docker-compose.yml; do
             if [[ "$file" != *"acr-test-github-actions-locally"* ]]; then
-            echo "Executing $file "
-            docker-compose -v
-            docker ps -a
+            echo -e "\n\n\nExecuting $file "
             ls -ltrha $file
             docker-compose -f $file up -d
+            sleep 5
             docker ps -a
-            sleep 30
             fi
           done
 
-#      - name: Set Docker Compose files to test
-#        id: compose_files
-#        run: |
-#          # Obtiene la lista de archivos docker-compose.yml que cambiaron
-#          FILES=$(git diff --name-only HEAD~1 HEAD | grep 'docker-compose.yml')
-#          echo "FILES=$FILES" >> $GITHUB_ENV
-#
-#      - name: Build and Run Docker Compose
-#        if: env.FILES != ''
-#        run: |
-#          for FILE in $FILES; do
-#            echo "Testing $FILE"
-#            docker-compose -f $FILE build
-#            docker-compose -f $FILE up -d
-#            docker-compose -f $FILE ps
-#            sleep 30
-#            docker-compose -f $FILE down
-#          done
+      - name: Check logs dockers
+        id: logs_docker
+        run: |
+          for docker in $(docker ps --format '{{.Names}}'); do
+            echo -e "\n\n\nExecuting logs $docker "
+            docker logs $docker)
+            sleep 1
+          done
