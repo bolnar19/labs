@@ -1,0 +1,49 @@
+version: '2'
+networks:
+  openldap:
+    driver: bridge
+services:
+  openldap:
+    #image: bitnami/openldap:2.6
+    #image: bitnami/openldap:2.6.7
+    image: bitnami/openldap:2.6.8
+    restart: always
+    container_name: openldap
+    hostname: "openldap"
+    ports:
+      #- '1389:1389'
+      #- '1636:1636'
+      - "389:389"
+      - "636:636"
+    environment:
+      - BITNAMI_DEBUG=true
+      - TZ=America/Bogota
+      - LDAP_PORT_NUMBER=389
+      - LDAP_LDAPS_PORT_NUMBER=636
+      - LDAP_USERS=user01
+      - LDAP_PASSWORDS=password1
+      - LDAP_ENABLE_TLS=yes
+      # LDAP_TLS_CA_FILE = olcTLSCACertificateFile
+      # LDAP_TLS_CERT_FILE = olcTLSCertificateFile
+      # LDAP_TLS_KEY_FILE = olcTLSCertificateKeyFile
+      #- LDAP_TLS_VERIFY_CLIENT=demand
+      - LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/etc/certs/openldap_cert_ca_root.crt
+      - LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/etc/certs/openldap_private.key
+      - LDAP_TLS_CA_FILE=/opt/bitnami/openldap/etc/certs/openldap_cert_ca_root.crt
+      #- LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/etc/certs/server.crt
+      #- LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/etc/certs/server.key
+      #- LDAP_TLS_CA_FILE=/opt/bitnami/openldap/etc/certs/ca.crt
+      #- LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/etc/certs/servercrt.pem
+      #- LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/etc/certs/serverkey.pem
+      #- LDAP_TLS_CA_FILE=/opt/bitnami/openldap/etc/certs/servercrt.pem
+    networks:
+      - openldap
+    volumes:
+      - ./openldap_data:/bitnami/openldap
+      - ./openldap_files/0_init:/tmp/openldap_files/0_init
+      #- ./ldifs/memberof.ldif:/opt/bitnami/openldap/etc/schema/memberof.ldif
+      #- ./ldifs/ppolicy.ldif:/opt/bitnami/openldap/etc/schema/ppolicy.ldif
+      - ./certs:/opt/bitnami/openldap/etc/certs
+
+# Cargar data desde cero con la shell: 
+# sh /tmp/openldap_files/0_init/initConfOpenLDAP.sh
