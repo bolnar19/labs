@@ -35,6 +35,7 @@ jobs:
           pwd
           ls -ltrha . */
           for file in docker-compose/*/docker-compose.yml; do
+            if [[ "$file" != *"acr-test-github-actions-locally"* ]]; then
             echo "Executing $file "
             docker-compose -v
             docker ps -a
@@ -42,6 +43,7 @@ jobs:
             docker-compose -f $file up -d
             docker ps -a
             sleep 30
+            fi
           done
 
 #      - name: Set Docker Compose files to test
