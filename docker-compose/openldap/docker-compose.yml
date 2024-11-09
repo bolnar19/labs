@@ -22,7 +22,7 @@ services:
       - LDAP_LDAPS_PORT_NUMBER=636
       - LDAP_USERS=user01
       - LDAP_PASSWORDS=password1
-      - LDAP_ENABLE_TLS=yes
+      #- LDAP_ENABLE_TLS=yes
       # LDAP_TLS_CA_FILE = olcTLSCACertificateFile
       # LDAP_TLS_CERT_FILE = olcTLSCertificateFile
       # LDAP_TLS_KEY_FILE = olcTLSCertificateKeyFile
