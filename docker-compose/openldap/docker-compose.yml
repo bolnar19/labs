@@ -27,15 +27,9 @@ services:
       # LDAP_TLS_CERT_FILE = olcTLSCertificateFile
       # LDAP_TLS_KEY_FILE = olcTLSCertificateKeyFile
       #- LDAP_TLS_VERIFY_CLIENT=demand
-      - LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/etc/certs/openldap_cert_ca_root.crt
-      - LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/etc/certs/openldap_private.key
-      - LDAP_TLS_CA_FILE=/opt/bitnami/openldap/etc/certs/openldap_cert_ca_root.crt
-      #- LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/etc/certs/server.crt
-      #- LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/etc/certs/server.key
-      #- LDAP_TLS_CA_FILE=/opt/bitnami/openldap/etc/certs/ca.crt
-      #- LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/etc/certs/servercrt.pem
-      #- LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/etc/certs/serverkey.pem
-      #- LDAP_TLS_CA_FILE=/opt/bitnami/openldap/etc/certs/servercrt.pem
+      #- LDAP_TLS_CERT_FILE=/opt/bitnami/openldap/etc/certs/openldap_cert_ca_root.crt
+      #- LDAP_TLS_KEY_FILE=/opt/bitnami/openldap/etc/certs/openldap_private.key
+      #- LDAP_TLS_CA_FILE=/opt/bitnami/openldap/etc/certs/openldap_cert_ca_root.crt
     networks:
       - openldap
     volumes:
