@@ -6,28 +6,37 @@ on:
       - 'docker-compose/**'
 
 jobs:
-#  test-docker-compose:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout code
-#        uses: actions/checkout@v2
-#      - name: Run Docker Compose example
-#        run: docker-compose -f docker-compose/nginx/docker-compose.yml up --build -d
-
   test-docker-compose:
     runs-on: ubuntu-latest
     services:
       docker:
         image: docker:20.10.9
         options: --privileged
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Build Docker images
+
+      - name: Install Docker Compose
         run: |
-          docker-compose -f docker-compose.yml build
-      - name: Run Docker-compose
+          apt-get update
+          apt-get install -y docker-compose
+
+      - name: Set Docker Compose files to test
+        id: compose_files
         run: |
-          docker-compose -f docker-compose.yml up -d
-          docker-compose -f docker-compose.yml ps
-          sleep 30
+          # Obtiene la lista de archivos docker-compose.yml que cambiaron
+          FILES=$(git diff --name-only HEAD~1 HEAD | grep 'docker-compose.yml')
+          echo "FILES=$FILES" >> $GITHUB_ENV
+
+      - name: Build and Run Docker Compose
+        if: env.FILES != ''
+        run: |
+          for FILE in $FILES; do
+            echo "Testing $FILE"
+            docker-compose -f $FILE build
+            docker-compose -f $FILE up -d
+            docker-compose -f $FILE ps
+            sleep 30
+            docker-compose -f $FILE down
+          done
