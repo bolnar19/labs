@@ -34,7 +34,7 @@ jobs:
         run: |
           pwd
           ls -ltrha .
-          for file in ./docker-compose/*/docker-compose.yml; do
+          for file in docker-compose/*/docker-compose.yml; do
             dir=$(dirname "$file")
             echo "Executing $file in directory $dir"
             pushd "$dir"
