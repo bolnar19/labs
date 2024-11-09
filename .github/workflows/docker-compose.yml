@@ -21,22 +21,29 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y docker-compose
+          docker-compose -v
 
-      - name: Set Docker Compose files to test
-        id: compose_files
+      - name: Run Docker-compose
         run: |
-          # Obtiene la lista de archivos docker-compose.yml que cambiaron
-          FILES=$(git diff --name-only HEAD~1 HEAD | grep 'docker-compose.yml')
-          echo "FILES=$FILES" >> $GITHUB_ENV
+          docker-compose -f ./docker-compose/gogs-git/docker-compose.yml up -d
+          docker-compose -f ./docker-compose/gogs-git/docker-compose.yml ps
+          sleep 30
 
-      - name: Build and Run Docker Compose
-        if: env.FILES != ''
-        run: |
-          for FILE in $FILES; do
-            echo "Testing $FILE"
-            docker-compose -f $FILE build
-            docker-compose -f $FILE up -d
-            docker-compose -f $FILE ps
-            sleep 30
-            docker-compose -f $FILE down
-          done
+#      - name: Set Docker Compose files to test
+#        id: compose_files
+#        run: |
+#          # Obtiene la lista de archivos docker-compose.yml que cambiaron
+#          FILES=$(git diff --name-only HEAD~1 HEAD | grep 'docker-compose.yml')
+#          echo "FILES=$FILES" >> $GITHUB_ENV
+#
+#      - name: Build and Run Docker Compose
+#        if: env.FILES != ''
+#        run: |
+#          for FILE in $FILES; do
+#            echo "Testing $FILE"
+#            docker-compose -f $FILE build
+#            docker-compose -f $FILE up -d
+#            docker-compose -f $FILE ps
+#            sleep 30
+#            docker-compose -f $FILE down
+#          done
