@@ -1,12 +1,11 @@
-# .github/workflows/docker-compose.yml
 name: Docker Compose Workflow
 
 on:
   push:
     paths:
       - 'docker-compose/**'
-#
-#jobs:
+
+jobs:
 #  test-docker-compose:
 #    runs-on: ubuntu-latest
 #    steps:
@@ -15,10 +14,20 @@ on:
 #      - name: Run Docker Compose example
 #        run: docker-compose -f docker-compose/nginx/docker-compose.yml up --build -d
 
-steps:
-  - uses: actions/checkout@v4
-  - uses: adambirds/docker-compose-action@v1.5.0
-    with:
-      compose-file: "./docker-compose/gogs-git/docker-compose.yml"
-    #env:
-    #  CUSTOM_VARIABLE: "test"
+  test-docker-compose:
+    runs-on: ubuntu-latest
+    services:
+      docker:
+        image: docker:20.10.9
+        options: --privileged
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Build Docker images
+        run: |
+          docker-compose -f docker-compose.yml build
+      - name: Run Docker-compose
+        run: |
+          docker-compose -f docker-compose.yml up -d
+          docker-compose -f docker-compose.yml ps
+          sleep 30
