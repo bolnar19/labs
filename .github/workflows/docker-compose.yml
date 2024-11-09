@@ -19,8 +19,10 @@ jobs:
 
       - name: Install Docker Compose
         run: |
-          sudo apt-get update
-          sudo apt-get install -y docker-compose
+          #sudo apt-get update
+          #sudo apt-get install -y docker-compose
+          apt-get update
+          apt-get install -y docker-compose
           docker-compose -v
 
 #      - name: Run Docker-compose
@@ -33,15 +35,14 @@ jobs:
         id: compose_files
         run: |
           pwd
-          ls -ltrha .
+          ls -ltrha . */
           for file in docker-compose/*/docker-compose.yml; do
-            dir=$(dirname "$file")
-            echo "Executing $file in directory $dir"
-            pushd "$dir"
-            #docker-compose -f $file build
+            echo "Executing $file "
+            docker-compose -v
+            docker ps -a
+            ls -ltrha $file
             docker-compose -f $file up -d
-            docker-compose ps -a
-            popd
+            docker ps -a
             sleep 30
           done
 

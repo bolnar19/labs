@@ -1,0 +1,17 @@
+version: '3.3'
+services:
+  acr-test-github-actions-locally:
+    image: act-base:1.0.0
+    container_name: acr-test-github-actions-locally
+    #hostname: "acr-test-github-actions-locally"
+    # Para consumir el API Docker de Docker Desktop
+    environment:
+      - DOCKER_HOST=tcp://host.docker.internal:2375
+    volumes:
+      - ../../:/workspace
+      # Para Linux nativo, en Windows con Docker Desktop no funciona
+      - /var/run/docker.sock:/var/run/docker.sock # Permite que el contenedor act pueda usar Docker
+    working_dir: /workspace
+    user: root
+    #command: tail -f /dev/null
+    command: ["act", "-P", "ubuntu-latest=node:16-buster-slim"]
