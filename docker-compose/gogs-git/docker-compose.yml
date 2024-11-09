@@ -1,0 +1,16 @@
+version: '3'
+
+services: 
+  gogs:
+    # https://hub.docker.com/
+    #image: gogs/gogs:0.12
+    # https://github.com/
+    image: ghcr.io/gogs/gogs:0.12    
+    restart: always
+    container_name: gogs
+    ports:
+      - "10022:22"
+      #- "8080:3000"
+      - "3003:3000"
+    volumes: 
+      - ./data/:/data
