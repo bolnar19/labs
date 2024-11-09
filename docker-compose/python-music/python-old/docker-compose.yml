@@ -1,0 +1,16 @@
+version: '3'
+
+networks:
+  python-music:
+    driver: bridge
+services:
+  python-music:
+    image: python-music:1.0.0
+    #restart: always
+    container_name: python-music
+    networks:
+      - python-music
+    volumes:
+      - ./mp3:/app/mp3
+#    command: sh -c "python downloadYoutubeToMp3.py"
+    command: tail -f /dev/null  # Mantiene el contenedor corriendo
