@@ -34,7 +34,7 @@ services:
       - openldap
     volumes:
       - ./openldap_data:/bitnami/openldap
-      - ./openldap_files/0_init:/tmp/openldap_files/0_init
+      - ./openldap_files:/tmp/openldap_files
       #- ./ldifs/memberof.ldif:/opt/bitnami/openldap/etc/schema/memberof.ldif
       #- ./ldifs/ppolicy.ldif:/opt/bitnami/openldap/etc/schema/ppolicy.ldif
       - ./certs:/opt/bitnami/openldap/etc/certs
