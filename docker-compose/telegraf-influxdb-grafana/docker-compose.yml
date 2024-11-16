@@ -1,0 +1,52 @@
+version: '3.6'
+services:
+  telegraf:
+    image: telegraf
+    container_name: telegraf
+    hostname: telegraf-local
+    #restart: always  #Hace que la imagen se reinicie siempre y aparezca arriba una vez inicie Docker Desktop
+    volumes:
+    - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    depends_on:
+      - influxdb
+    links:
+      - influxdb
+    ports:
+    - '8125:8125'
+
+  influxdb:
+    #image: influxdb:latest
+    image: influxdb:1.8-alpine
+    container_name: influxdb
+    hostname: influxdb
+    #restart: always  #Hace que la imagen se reinicie siempre y aparezca arriba una vez inicie Docker Desktop
+    environment:
+      - INFLUXDB_DB=influx
+      - INFLUXDB_ADMIN_USER=admin
+      - INFLUXDB_ADMIN_PASSWORD=admin
+    ports:
+      - '8086:8086'
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+
+  grafana:
+    image: grafana/grafana
+    container_name: grafana-server
+    hostname: grafana-server
+    #restart: always  #Hace que la imagen se reinicie siempre y aparezca arriba una vez inicie Docker Desktop
+    depends_on:
+      - influxdb
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=
+    links:
+      - influxdb
+    ports:
+      - '3000:3000'
+    volumes:
+      - grafana_data:/var/lib/grafana
+      
+volumes:
+  grafana_data: {}
+  influxdb_data: {}
