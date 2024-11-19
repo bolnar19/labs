@@ -22,6 +22,7 @@ jobs:
 
       - name: Verify Resources
         run: |
+          sleep 20
           kubectl -n haproxy get all -o wide
           kubectl -n haproxy logs deployment.apps/haproxy --all-containers
 
