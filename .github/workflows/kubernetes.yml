@@ -23,3 +23,14 @@ jobs:
       - name: Verify Resources
         run: |
           kubectl -n haproxy get all -o wide
+          kubectl -n haproxy logs deployment.apps/haproxy --all-containers
+
+#     - name: Install kubectl
+#       run: |
+#         curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+#         chmod +x kubectl
+#         sudo mv kubectl /usr/local/bin/
+#
+#     - name: Diff Kubernetes Configs
+#       run: |
+#         kubectl diff -f ./kubernetes/haproxy/.
