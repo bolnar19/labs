@@ -1,0 +1,25 @@
+name: Test Kubernetes Deployment
+
+on:
+  push:
+    paths:
+      - 'kubernetes/**'
+
+jobs:
+  test-deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up KinD
+        uses: helm/kind-action@v1.10.0
+
+      - name: Apply Kubernetes Configurations
+        run: |
+          kubectl create ns haproxy
+          kubectl apply -f ./kubernetes/haproxy/.
+
+      - name: Verify Resources
+        run: |
+          kubectl -n haproxy get all -o wide

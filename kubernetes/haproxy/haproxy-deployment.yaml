@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: haproxy
+  namespace: haproxy
+spec:
+  selector:
+    matchLabels:
+      app: haproxy
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: haproxy
+    spec:
+      containers:
+        - name: haproxy-container
+          image: haproxy:1.8.27
+          #image: haproxy:2.4.4
+          imagePullPolicy: Always #Always #IfNotPresent
+          ports:
+            - containerPort: 443
+          volumeMounts:
+            - name: haproxy-conf-configmap
+              mountPath: /usr/local/etc/haproxy/haproxy.cfg
+              subPath: haproxy.cfg
+      volumes:
+        - name: haproxy-conf-configmap
+          configMap:
+            name: haproxy-conf-configmap
