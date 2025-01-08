@@ -37,6 +37,7 @@ jobs:
             docker ps -a
             fi
           done
+          docker logs nginx
 
       - name: Check logs dockers
         id: logs_docker
