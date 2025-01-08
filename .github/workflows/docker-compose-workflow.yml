@@ -3,7 +3,7 @@ name: Docker Compose Workflow
 on:
   push:
     paths:
-      - 'docker-compose/**'
+      - 'docker/**'
 
 jobs:
   test-docker-compose:
@@ -28,7 +28,7 @@ jobs:
         run: |
           pwd; ls -ltrha . */
           docker ps -a
-          for file in docker-compose/*/docker-compose.yml; do
+          for file in docker/*/docker-compose.y*; do
             if [[ "$file" != *"acr-test-github-actions-locally"* ]]; then
             echo -e "\n\n\nExecuting $file "
             ls -ltrha $file
