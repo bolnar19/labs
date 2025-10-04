@@ -1,9 +1,0 @@
-version: '3'
-services:
-  youtube-downloader:
-    build: .
-    container_name: youtube_downloader
-    volumes:
-      - ./downloads:/app/downloads  # Montar el directorio de descargas a la máquina local
-    stdin_open: true
-    tty: true
