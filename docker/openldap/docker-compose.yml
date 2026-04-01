@@ -6,7 +6,8 @@ services:
   openldap:
     #image: bitnami/openldap:2.6
     #image: bitnami/openldap:2.6.7
-    image: bitnami/openldap:2.6.8
+    #image: bitnami/openldap:2.6.8
+    image: bitnamilegacy/openldap:2.6.8
     restart: always
     container_name: openldap
     hostname: "openldap"
