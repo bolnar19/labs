@@ -13,7 +13,7 @@ services:
     build: . or ./directory_Dockerfile
     image: nameImage:1.0.0
     restart: Always #Always on-failure
-    container_name: networ_1
+    container_name: NameContainer
     hostname: "host1"
     ports:
       - "11:11"

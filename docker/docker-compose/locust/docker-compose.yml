@@ -2,7 +2,10 @@ version: '3'
 
 services:
   master:
-    image: locustio/locust
+    image: locustio/locust:2.42.5
+    container_name: locust_master
+    environment:
+      - TZ=America/Bogota
     ports:
      - "8089:8089"
     volumes:
@@ -10,7 +13,10 @@ services:
     command: -f /mnt/locust/Script.py --master -H http://master:8089 #--web-host=0.0.0.0
   
   worker:
-    image: locustio/locust
+    image: locustio/locust:2.42.5
+    container_name: locust_worker
+    environment:
+      - TZ=America/Bogota
     volumes:
       - ./:/mnt/locust
     command: -f /mnt/locust/Script.py --worker --master-host master --loglevel DEBUG --csv=full-history
