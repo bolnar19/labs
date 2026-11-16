@@ -41,23 +41,6 @@ docker compose logs -f
 ## UI Web
 - floci-ui: http://localhost:4500  
 
-## Terraform comands
-
-```bash
-terraform init
-terraform validate
-terraform plan
-terraform apply
-terraform destroy
-```
-
-## Limpieza
-
-```bash
-# Limpieza archivos terraform
-rm -rf .terraform* terraform.tfstate terraform.tfstate.backup
-
-```
 
 ---
 
