@@ -10,8 +10,10 @@ Un proyecto de Terraform suele estar compuesto por varios archivos `.tf`, cada u
 * ***.tfvars:** Almacena los valores de las variables para cada entorno.
 
 ## Links 
-* https://github.com/terraform-aws-modules
-
+* **Hashicorp docs url:** https://registry.terraform.io/providers/hashicorp/aws/latest/docs
+* **Hashicorp docs git:** https://github.com/hashicorp/terraform-provider-aws/tree/main/examples
+* **Terraform modules:** https://github.com/terraform-aws-modules
+* **Brainboard (visual infra):** https://app.brainboard.co
 
 ## Terraform comands
 
