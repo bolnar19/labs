@@ -5,3 +5,7 @@ variable "security_group_name" {
 variable "security_group_description" {
   type = string
 }
+
+variable "vpc_id" {
+  type = string
+}

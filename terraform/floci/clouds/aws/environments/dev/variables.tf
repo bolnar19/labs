@@ -12,6 +12,20 @@ variable "aws_region" {
 }
 
 
+# VPC
+variable "vpc_name" {
+  type = string
+}
+
+variable "vpc_cidr" {
+  type = string
+}
+
+variable "public_subnet_cidr" {
+  type = string
+}
+
+
 # Security Group
 variable "security_group_name" {
   type = string
@@ -34,4 +48,3 @@ variable "ec2_ami" {
 variable "ec2_instance_type" {
   type = string
 }
-
