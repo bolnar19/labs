@@ -10,9 +10,8 @@ services:
 
     # Build image using Dockerfile in current directory
     build: .
-
     # Build image using Dockerfile in another directory
-    # build: ./docker/Dockerfile
+    build: ./docker/Dockerfile
 
     # Build image and assign a name/tag to the resulting image
     image: my-app:1.0.0
@@ -31,10 +30,9 @@ services:
       - "8443:8443"
 
     # Environment - array syntax
-    # environment:
-    #   - TZ=America/Bogota
-    #   - JAVA_OPTS=-Xms512m -Xmx1024m
-
+    environment:
+      - TZ=America/Bogota
+      - JAVA_OPTS=-Xms512m -Xmx1024m
     # Environment - map syntax
     environment:
       TZ: America/Bogota
