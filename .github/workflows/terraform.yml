@@ -17,11 +17,18 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-      - uses: hashicorp/setup-terraform@v3
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
 
-      - name: Terraform Fmt
+      #################################
+      # TERRAFORM
+      #################################
+
+      - name: Terraform Format Check
+        working-directory: terraform
         run: terraform fmt -check -recursive
 
       - name: Terraform Init
@@ -31,4 +38,31 @@ jobs:
         run: terraform validate
 
       - name: Terraform Plan
-        run: terraform plan
+        run: terraform plan -input=false
+
+      #################################
+      # TFLINT
+      #################################
+
+      - name: Setup TFLint
+        uses: terraform-linters/setup-tflint@v4
+
+      - name: Show TFLint version
+        run: tflint --version
+
+      - name: Init TFLint
+        run: tflint --init
+
+      - name: Run TFLint
+        run: tflint
+
+      #################################
+      # CHECKOV
+      #################################
+
+      - name: Run Checkov Scan
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: terraform/floci/clouds/aws
+          framework: terraform
+          quiet: true
