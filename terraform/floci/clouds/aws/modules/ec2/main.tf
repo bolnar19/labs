@@ -1,7 +1,7 @@
 resource "aws_instance" "this" {
 
-  ami                     = var.ec2_ami
-  instance_type           = var.ec2_instance_type
+  ami           = var.ec2_ami
+  instance_type = var.ec2_instance_type
 
   subnet_id = var.subnet_id
 
@@ -17,12 +17,12 @@ resource "aws_instance" "this" {
   }
   //user_data = "${file("ec2-init-script.sh")}"
 
-//provisioner "remote-exec" {
-//  inline = [
-//      "sudo yum install httpd php git -y",
-//      "sudo systemctl restart httpd",
-//      "sudo systemctl enable httpd",
-//      "sudo yum install -y amazon-efs-utils",
-//    ]
-//  }
+  //provisioner "remote-exec" {
+  //  inline = [
+  //      "sudo yum install httpd php git -y",
+  //      "sudo systemctl restart httpd",
+  //      "sudo systemctl enable httpd",
+  //      "sudo yum install -y amazon-efs-utils",
+  //    ]
+  //  }
 }
