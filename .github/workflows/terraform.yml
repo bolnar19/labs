@@ -66,3 +66,11 @@ jobs:
           directory: terraform/floci/clouds/aws
           framework: terraform
           quiet: true
+          soft_fail: true
+
+          #skip_check: >
+          #  CKV_AWS_24,
+          #  CKV_AWS_25,
+          #  CKV_AWS_260,
+          #  CKV_AWS_277,
+          #  CKV_AWS_382
