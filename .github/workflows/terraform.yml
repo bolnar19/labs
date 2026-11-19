@@ -44,23 +44,23 @@ jobs:
       # TFLINT
       #################################
 
-      - name: Setup TFLint
+      - name: TFLint Setup
         uses: terraform-linters/setup-tflint@v4
 
-      - name: Show TFLint version
+      - name: TFLint Show version
         run: tflint --version
 
-      - name: Init TFLint
+      - name: TFLint Init
         run: tflint --init
 
-      - name: Run TFLint
+      - name: TFLint Run
         run: tflint
 
       #################################
       # CHECKOV
       #################################
 
-      - name: Run Checkov Scan
+      - name: Checkov Run Scan
         uses: bridgecrewio/checkov-action@master
         with:
           directory: terraform/floci/clouds/aws
