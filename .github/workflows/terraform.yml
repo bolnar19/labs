@@ -13,7 +13,7 @@ jobs:
 
     defaults:
       run:
-        working-directory: terraform/floci/clouds/aws/environments/dev
+        working-directory: terraform/clouds/aws/environments/dev
 
     steps:
 
@@ -63,7 +63,7 @@ jobs:
       - name: Checkov Run Scan
         uses: bridgecrewio/checkov-action@master
         with:
-          directory: terraform/floci/clouds/aws
+          directory: terraform/clouds/aws
           framework: terraform
           quiet: true
           soft_fail: true
