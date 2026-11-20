@@ -1,0 +1,22 @@
+services:
+  aws-emulator:
+    image: aws-emulator:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: aws-emulator
+    restart: unless-stopped
+
+    ports:
+      - "9297:9297"
+
+    environment:
+      EMULATOR_TELEMETRY: "off"
+      HOME: "/home/emulator"
+
+    volumes:
+      - ./data:/home/emulator/.aws/emulator
+
+    command:
+      - "-p"
+      - "9297"
