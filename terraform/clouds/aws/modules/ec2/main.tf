@@ -2,20 +2,20 @@ resource "aws_instance" "this" {
 
   ami           = var.ec2_ami
   instance_type = var.ec2_instance_type
-  subnet_id = var.subnet_id
+  subnet_id     = var.subnet_id
   #key_name                = var.ec2_key_name
   #private_ip              = "172.31.46.179"
-  monitoring = true
+  monitoring    = true
   ebs_optimized = true
 
-metadata_options {
-  http_endpoint = "enabled"
-  http_tokens = "required"
-}
+  metadata_options {
+    http_endpoint = "enabled"
+    http_tokens   = "required"
+  }
 
-root_block_device {
-  encrypted = true
-}
+  root_block_device {
+    encrypted = true
+  }
 
   vpc_security_group_ids = [
     var.security_group_id
