@@ -17,6 +17,9 @@ ec2_ami           = "ami-12345678"
 ec2_instance_type = "t3.micro"
 #ec2_instance_count  = 2
 
+# s3
+bucket_name = "s3-test"
+
 
 # Database conf
 

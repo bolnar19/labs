@@ -48,3 +48,9 @@ variable "ec2_ami" {
 variable "ec2_instance_type" {
   type = string
 }
+
+
+# s3
+variable "bucket_name" {
+  type = string
+}
